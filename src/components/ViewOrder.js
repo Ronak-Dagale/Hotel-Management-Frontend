@@ -149,6 +149,17 @@ const ViewOrder = () => {
       )
 
       setConfirmedOrders(response.data.order)
+
+       setItems((prevItems) =>
+        prevItems.map((item) =>
+          item._id === itemId ? { ...item, qty: 0, note: '' } : item
+        )
+      )
+      setFilteredItems((prevItems) =>
+        prevItems.map((item) =>
+          item._id === itemId ? { ...item, qty: 0, note: '' } : item
+        )
+      )
     } catch (error) {
       console.error('Error confirming order:', error)
     }
