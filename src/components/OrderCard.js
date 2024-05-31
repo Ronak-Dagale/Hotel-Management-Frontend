@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 const OrderCard = ({ item, updateOrderQuantity, confirmOrder,deleteItem }) => {
     const [quantity, setQuantity] = useState(item.qty);
-    const [note, setNote] = useState(item.note || '');
+    const [note, setNote] = useState('');
 
     const handleIncrease = () => {
         const newQuantity = quantity + 1;
@@ -25,7 +25,8 @@ const OrderCard = ({ item, updateOrderQuantity, confirmOrder,deleteItem }) => {
 
     const handleConfirm = () => {
         confirmOrder(item._id);
-        setQuantity(0); // Reset quantity to zero
+       setQuantity(0)
+    setNote('') // Reset quantity to zero
     };
 
     const handleDelete = () => {
