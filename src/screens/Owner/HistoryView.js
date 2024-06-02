@@ -79,8 +79,8 @@ const HistoryOrderView = () => {
               <td>{item.name}</td>
               <td>{item.qty}</td>
 
-              <td>${item.price}</td>
-              <td>${item.qty * item.price}</td>
+              <td>Rs {item.price}</td>
+              <td>Rs {item.qty * item.price}</td>
             </tr>
           ))}
         </tbody>
