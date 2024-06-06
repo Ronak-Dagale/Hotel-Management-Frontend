@@ -1,12 +1,15 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import PrintBill from '../../components/PrintBill'
+import { useReactToPrint } from 'react-to-print'
 
 const Bill = () => {
   const { tableId } = useParams()
   const navigate = useNavigate()
   const [tableDetails, setTableDetails] = useState(null)
   const [totalAmount, setTotalAmount] = useState(0)
+  const printRef = useRef()
 
   useEffect(() => {
     const fetchTableDetails = async () => {
@@ -16,7 +19,7 @@ const Bill = () => {
           `${process.env.REACT_APP_BASE_URL}/api/tables/${tableId}`,
           {
             headers: {
-              Authorization: `Bearer ${token}`, // Include the token in the Authorization header
+              Authorization: `Bearer ${token}`,
             },
           }
         )
@@ -47,7 +50,7 @@ const Bill = () => {
         {
           headers: {
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`, // Include the token in the Authorization header
+            Authorization: `Bearer ${token}`,
           },
         }
       )
@@ -81,9 +84,9 @@ const Bill = () => {
     }
   }
 
-  const handlePrint = () => {
-    window.print()
-  }
+  const handlePrint = useReactToPrint({
+    content: () => printRef.current,
+  })
 
   if (!tableDetails) {
     return <div>Loading...</div>
@@ -131,6 +134,14 @@ const Bill = () => {
         <button className='btn btn-primary m-2' onClick={handlePrint}>
           Print
         </button>
+      </div>
+
+      <div style={{ display: 'none' }}>
+        <PrintBill
+          ref={printRef}
+          tableDetails={tableDetails}
+          totalAmount={totalAmount}
+        />
       </div>
     </div>
   )

@@ -33,10 +33,10 @@ const Table = () => {
       setTables((prevTables) =>
         prevTables.filter((table) => table._id !== deletedTable._id)
       )
-      console.log('Deleted table:', deletedTable)
+      // console.log('Deleted table:', deletedTable)
     })
     socket.on('tableAdded', (newTable) => {
-      console.log('New table')
+      // console.log('New table')
       setTables((prevTables) => [...prevTables, newTable])
     })
 
@@ -84,7 +84,7 @@ const Table = () => {
       )
       const updatedTables = await response.json()
       setTables(updatedTables)
-      console.log('Deleted the table with the highest table number')
+      // console.log('Deleted the table with the highest table number')
     } catch (error) {
       console.error('Error deleting table:', error)
     }
@@ -106,7 +106,7 @@ const Table = () => {
       )
       const newTable = await response.json()
       setTables([...tables, newTable])
-      console.log('Added new table:', newTable.table_number)
+      // console.log('Added new table:', newTable.table_number)
     } catch (error) {
       console.error('Error adding table:', error)
     }

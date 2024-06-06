@@ -14,6 +14,7 @@ const CategoryManagement = () => {
 
   const fetchCategories = async () => {
     const token = localStorage.getItem('authToken')
+
     try {
       const res = await axios.get(
         `${process.env.REACT_APP_BASE_URL}/api/foodcategory/`,
@@ -27,6 +28,7 @@ const CategoryManagement = () => {
       setCategories(res.data)
     } catch (err) {
       console.error(err)
+      //<ErrorDisplay err={err} />
     }
   }
 

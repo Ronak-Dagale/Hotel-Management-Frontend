@@ -4,13 +4,13 @@ import { useAuth } from '../store/auth'
 
 const ProtectedRoute = ({ role }) => {
   const { auth } = useAuth()
-  console.log('auth', auth)
+  // console.log('auth', auth)
   if (!auth || !auth.isAuthenticated || !auth.user) {
-    console.log('Not authenticated')
+    // console.log('Not authenticated')
     return <Navigate to='/' />
   }
   if (role && !role.includes(auth.user.role)) {
-    console.log('Not authenticated from role')
+    // console.log('Not authenticated from role')
     return <Navigate to='/' />
   }
 

@@ -31,7 +31,7 @@ export const AuthProvider = ({ children }) => {
               },
             }
           )
-          console.log('res', res)
+          // console.log('res', res)
           setAuth({ isAuthenticated: true, user: res.data })
         } catch (err) {
           console.error(err)

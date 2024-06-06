@@ -1,13 +1,18 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useAuth } from '../store/auth'
 
 const Navbar = () => {
   const { auth, setAuth } = useAuth()
+  const [isCollapsed, setIsCollapsed] = useState(true)
 
   const handleLogout = () => {
     localStorage.removeItem('authToken')
     setAuth({ isAuthenticated: false, user: null })
+  }
+
+  const toggleCollapse = () => {
+    setIsCollapsed(!isCollapsed)
   }
 
   return (
@@ -19,16 +24,17 @@ const Navbar = () => {
         <button
           className='navbar-toggler'
           type='button'
-          data-bs-toggle='collapse'
-          data-bs-target='#navbarSupportedContent'
+          onClick={toggleCollapse}
           aria-controls='navbarSupportedContent'
-          aria-expanded='false'
+          aria-expanded={!isCollapsed ? 'true' : 'false'}
           aria-label='Toggle navigation'>
           <span className='navbar-toggler-icon'></span>
         </button>
-        <div className='collapse navbar-collapse' id='navbarSupportedContent'>
+        <div
+          className={`collapse navbar-collapse ${isCollapsed ? '' : 'show'}`}
+          id='navbarSupportedContent'>
           {auth.isAuthenticated && (
-            <ul className='navbar-nav me-auto mb-2 mb-lg-0 '>
+            <ul className='navbar-nav me-auto mb-2 mb-lg-0'>
               {auth.user && auth.user.role === 'owner' && (
                 <>
                   <li className='nav-item'>
@@ -66,7 +72,6 @@ const Navbar = () => {
             </ul>
           )}
         </div>
-        {/* Move Logout button to the right */}
         <div className='d-flex'>
           {auth.isAuthenticated && (
             <button className='btn btn-danger ml-auto' onClick={handleLogout}>

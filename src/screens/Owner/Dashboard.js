@@ -40,16 +40,16 @@ const Dashboard = () => {
       setTables((prevTables) =>
         prevTables.filter((table) => table._id !== deletedTable._id)
       )
-      console.log('Deleted table:', deletedTable)
+      // console.log('Deleted table:', deletedTable)
     })
 
     socket.on('tableAdded', (newTable) => {
-      console.log('New table')
+      // console.log('New table')
       setTables((prevTables) => [...prevTables, newTable])
     })
 
     socket.on('orderUpdated', (updatedTable) => {
-      console.log('Order updated')
+      // console.log('Order updated')
       // setTables((prevTables) =>
       //   prevTables.map((table) =>
       //     table._id === updatedTable._id ? updatedTable : table
@@ -67,7 +67,7 @@ const Dashboard = () => {
     })
 
     socket.on('tableFreed', (freedTable) => {
-      console.log('Table freed')
+      // console.log('Table freed')
       fetchTablesData()
     })
 
@@ -100,11 +100,11 @@ const Dashboard = () => {
         return response.json()
       })
       .then((data) => {
-        console.log('Table freed successfully:', data)
+        // console.log('Table freed successfully:', data)
         // You can handle further success actions here
       })
       .catch((error) => {
-        console.error('Error freeing table:', error)
+        //  / console.error('Error freeing table:', error)
         // Handle errors here
       })
   }

@@ -10,7 +10,7 @@ const HistoryOrderView = () => {
   useEffect(() => {
     const fetchOrder = async () => {
       const token = localStorage.getItem('authToken')
-      console.log('Token:', token)
+      // console.log('Token:', token)
 
       if (!token) {
         setError('Authorization token is missing')
@@ -27,7 +27,7 @@ const HistoryOrderView = () => {
             },
           }
         )
-        console.log(response.data)
+        // console.log(response.data)
         setOrder(response.data)
       } catch (error) {
         console.error('Error fetching order:', error)
@@ -79,8 +79,8 @@ const HistoryOrderView = () => {
               <td>{item.name}</td>
               <td>{item.qty}</td>
 
-              <td>${item.price}</td>
-              <td>${item.qty * item.price}</td>
+              <td>Rs {item.price}</td>
+              <td>RS {item.qty * item.price}</td>
             </tr>
           ))}
         </tbody>

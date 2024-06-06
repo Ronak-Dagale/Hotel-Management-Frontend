@@ -79,7 +79,7 @@ const CompletedOrdersPage = () => {
               <td>{index + 1}</td>
               <td>{order.table_number}</td>
               <td>{new Date(order.timestamp).toLocaleString()}</td>
-              <td>${order.total_bill}</td>
+              <td>Rs {order.total_bill}</td>
               <td>
                 <button
                   className='btn btn-primary'

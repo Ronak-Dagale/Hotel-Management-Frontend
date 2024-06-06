@@ -84,7 +84,7 @@ const FoodItem = () => {
 
   const toggleStatus = async (id) => {
     const updatedFoodItem = foodItems.find((item) => item._id === id)
-    console.log(updatedFoodItem)
+    // console.log(updatedFoodItem)
     updatedFoodItem.status =
       updatedFoodItem.status === 'Active' ? 'Inactive' : 'Active'
     const token = localStorage.getItem('authToken')

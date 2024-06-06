@@ -52,7 +52,7 @@ const Dashboard = () => {
     }
 
     const handleOrderTaken = (tableId, order) => {
-      console.log('orderTaken')
+      // console.log('orderTaken')
       // appendOrderToTable(tableId, order)
       // const tableNumber = findTableNumber(tableId)
       // const orderWithTableInfo = {
@@ -68,7 +68,7 @@ const Dashboard = () => {
     }
 
     const handleOrderDeleted = (tableId, order) => {
-      console.log('orderDeleted')
+      // console.log('orderDeleted')
       // setTables((prevTables) => {
       //   const newTables = prevTables.map((table) => {
       //     if (table._id === tableId && table.order) {
@@ -87,7 +87,7 @@ const Dashboard = () => {
     }
 
     const handleOrderStatusOngoing = (tableId, order) => {
-      console.log('orderStatusOngoing')
+      // console.log('orderStatusOngoing')
       // setPendingOrders((prevOrders) =>
       //   prevOrders.filter((o) => o._id !== order._id)
       // )
@@ -114,7 +114,7 @@ const Dashboard = () => {
     }
 
     const handleOrderStatusDone = (tableId, order) => {
-      console.log('orderStatusDone')
+      // console.log('orderStatusDone')
       // if (order) {
       //   setWorkingOrders((prevWorkingOrders) =>
       //     prevWorkingOrders.filter((o) => o._id !== order._id)
@@ -143,7 +143,7 @@ const Dashboard = () => {
     }
 
     const handleTableFreed = (tableId) => {
-      console.log('tableFreed')
+      // console.log('tableFreed')
       // setTables((prevTables) => {
       //   const newTables = prevTables.map((table) => {
       //     if (table._id === tableId) {
@@ -201,7 +201,7 @@ const Dashboard = () => {
   }, [tables])
 
   useEffect(() => {
-    console.log('workingOrders:', workingOrders)
+    // console.log('workingOrders:', workingOrders)
   }, [workingOrders])
 
   const updateOrders = (tablesData) => {
