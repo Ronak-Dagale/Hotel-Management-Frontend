@@ -5,7 +5,8 @@ import { io } from 'socket.io-client'
 import Cards from '../../components/Cards'
 
 const Dashboard = () => {
-  const socket = io(`${process.env.REACT_APP_BASE_URL}`)
+   const socket = io(`${process.env.REACT_APP_BASE_URL}`)
+ // const socket = io(`${process.env.REACT_APP_WS_URL}`)
   const navigate = useNavigate()
   const [tables, setTables] = useState([])
 
