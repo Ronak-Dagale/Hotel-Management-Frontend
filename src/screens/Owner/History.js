@@ -1,10 +1,13 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
+import PrintHistory from '../../components/PrintHistory'
+import { useReactToPrint } from 'react-to-print'
 
 const CompletedOrdersPage = () => {
   const [completedOrders, setCompletedOrders] = useState([])
   const navigate = useNavigate()
+  const printRef = useRef()
 
   useEffect(() => {
     const fetchCompletedOrders = async () => {
@@ -31,10 +34,9 @@ const CompletedOrdersPage = () => {
     navigate(`/owner/history/${orderId}`)
   }
 
-  const handlePrint = () => {
-    window.print()
-  }
-
+  const handlePrint = useReactToPrint({
+    content: () => printRef.current,
+  })
   const handleDeleteAll = async () => {
     const token = localStorage.getItem('authToken')
     try {
@@ -91,6 +93,9 @@ const CompletedOrdersPage = () => {
           ))}
         </tbody>
       </table>
+      <div style={{ display: 'none' }}>
+        <PrintHistory ref={printRef} completedOrders={completedOrders} />
+      </div>
     </div>
   )
 }

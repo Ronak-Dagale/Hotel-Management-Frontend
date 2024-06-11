@@ -87,7 +87,7 @@ const HistoryOrderView = () => {
       </table>
 
       <p>
-        <strong>Total Bill: </strong> ${order.total_bill}
+        <strong>Total Bill: </strong> Rs. {order.total_bill}
       </p>
     </div>
   )

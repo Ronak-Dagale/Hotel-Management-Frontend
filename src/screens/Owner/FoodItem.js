@@ -137,6 +137,9 @@ const FoodItem = () => {
   return (
     <div className='container'>
       <h2 className='text-center mt-5'>Food Item Information</h2>
+      <button className='btn btn-success mt-3 mb-3' onClick={handleAddFoodItem}>
+        Add Food Item
+      </button>
       <div className='table-responsive'>
         <table className='table table-bordered'>
           <thead className='thead-dark'>
@@ -187,9 +190,6 @@ const FoodItem = () => {
           </tbody>
         </table>
       </div>
-      <button className='btn btn-success mt-3' onClick={handleAddFoodItem}>
-        Add Food Item
-      </button>
 
       {editModalShow && (
         <EditFoodItemModal

@@ -95,7 +95,7 @@ const CategoryManagement = () => {
   return (
     <div className='container'>
       <h2 className='text-center mt-5'>Category Management</h2>
-      <button className='btn btn-success mt-3' onClick={handleAdd}>
+      <button className='btn btn-success mt-3 mb-3' onClick={handleAdd}>
         Add Category
       </button>
       <div className='table-responsive'>
