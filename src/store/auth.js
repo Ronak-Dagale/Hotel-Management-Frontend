@@ -11,7 +11,7 @@ export const AuthProvider = ({ children }) => {
   })
 
   const storeTokenInLs = (token) => {
-    console.log('storing token in ls', token)
+    // console.log('storing token in ls', token)
     setAuth((prevAuth) => ({ ...prevAuth, token }))
   }
 
