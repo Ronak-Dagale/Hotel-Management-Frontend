@@ -3,15 +3,16 @@ import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import PrintHistory from '../../components/PrintHistory'
 import { useReactToPrint } from 'react-to-print'
-
+import { useAuth } from '../../store/auth'
 const CompletedOrdersPage = () => {
   const [completedOrders, setCompletedOrders] = useState([])
   const navigate = useNavigate()
   const printRef = useRef()
-
+  const { auth } = useAuth()
   useEffect(() => {
     const fetchCompletedOrders = async () => {
-      const token = localStorage.getItem('authToken')
+      // const token = localStorage.getItem('authToken')
+      const { token } = auth
       try {
         const response = await axios.get(
           `${process.env.REACT_APP_BASE_URL}/api/history/`,
@@ -38,7 +39,8 @@ const CompletedOrdersPage = () => {
     content: () => printRef.current,
   })
   const handleDeleteAll = async () => {
-    const token = localStorage.getItem('authToken')
+    // const token = localStorage.getItem('authToken')
+    const { token } = auth
     try {
       await axios.delete(`${process.env.REACT_APP_BASE_URL}/api/history/`, {
         headers: {

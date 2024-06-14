@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import EditEmployeeModal from './EditEmployeeModal'
-
+import { useAuth } from '../../store/auth'
 const Employee = () => {
   const [employees, setEmployees] = useState([])
   const [selectedEmployee, setSelectedEmployee] = useState(null)
   const [editModalShow, setEditModalShow] = useState(false)
-
+  const { auth } = useAuth()
   useEffect(() => {
     const fetchEmployees = async () => {
-      const token = localStorage.getItem('authToken')
+      // const token = localStorage.getItem('authToken')
+      const { token } = auth
       try {
         const response = await axios.get(
           `${process.env.REACT_APP_BASE_URL}/api/getEmployees`,
@@ -35,7 +36,8 @@ const Employee = () => {
   }
 
   const handleDelete = async (id) => {
-    const token = localStorage.getItem('authToken')
+    // const token = localStorage.getItem('authToken')
+    const { token } = auth
     try {
       await axios.delete(
         `${process.env.REACT_APP_BASE_URL}/api/deleteEmployee/${id}`,
@@ -64,7 +66,8 @@ const Employee = () => {
 
   const saveEmployee = async (updatedEmployee) => {
     // console.log(updatedEmployee)
-    const token = localStorage.getItem('authToken')
+    // const token = localStorage.getItem('authToken')
+    const { token } = auth
     try {
       if (selectedEmployee) {
         // Update existing employee

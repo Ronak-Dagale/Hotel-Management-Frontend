@@ -4,23 +4,24 @@ import axios from 'axios'
 export const AuthContext = createContext()
 
 export const AuthProvider = ({ children }) => {
-  const storeTokenInLs = (token) => {
-    localStorage.setItem('authToken', token)
-  }
-
-  const clearAuth = () => {
-    localStorage.removeItem('authToken')
-    setAuth({ isAuthenticated: false, user: null })
-  }
-
   const [auth, setAuth] = useState({
     isAuthenticated: false,
     user: null,
+    token: null,
   })
+
+  const storeTokenInLs = (token) => {
+    console.log('storing token in ls', token)
+    setAuth((prevAuth) => ({ ...prevAuth, token }))
+  }
+
+  const clearAuth = () => {
+    setAuth({ isAuthenticated: false, user: null, token: null })
+  }
 
   useEffect(() => {
     const checkAuth = async () => {
-      const token = localStorage.getItem('authToken')
+      const token = auth.token
       if (token) {
         try {
           const res = await axios.get(
@@ -32,10 +33,10 @@ export const AuthProvider = ({ children }) => {
             }
           )
           // console.log('res', res)
-          setAuth({ isAuthenticated: true, user: res.data })
+          setAuth({ isAuthenticated: true, user: res.data, token })
         } catch (err) {
           console.error(err)
-          setAuth({ isAuthenticated: false, user: null })
+          setAuth({ isAuthenticated: false, user: null, token: null })
         }
       }
     }

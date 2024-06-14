@@ -7,8 +7,8 @@ const Navbar = () => {
   const [isCollapsed, setIsCollapsed] = useState(true)
 
   const handleLogout = () => {
-    localStorage.removeItem('authToken')
-    setAuth({ isAuthenticated: false, user: null })
+    // localStorage.removeItem('authToken')
+    setAuth({ isAuthenticated: false, user: null, token: null })
   }
 
   const toggleCollapse = () => {

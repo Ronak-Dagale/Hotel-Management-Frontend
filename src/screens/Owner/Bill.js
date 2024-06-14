@@ -3,17 +3,18 @@ import { useParams, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import PrintBill from '../../components/PrintBill'
 import { useReactToPrint } from 'react-to-print'
-
+import { useAuth } from '../../store/auth'
 const Bill = () => {
   const { tableId } = useParams()
   const navigate = useNavigate()
   const [tableDetails, setTableDetails] = useState(null)
   const [totalAmount, setTotalAmount] = useState(0)
   const printRef = useRef()
-
+  const { auth } = useAuth()
   useEffect(() => {
     const fetchTableDetails = async () => {
-      const token = localStorage.getItem('authToken')
+      // const token = localStorage.getItem('authToken')
+      const { token } = auth
       try {
         const response = await axios.get(
           `${process.env.REACT_APP_BASE_URL}/api/tables/${tableId}`,
@@ -40,7 +41,8 @@ const Bill = () => {
   const handleDelete = async (item) => {
     console.log('Deleting item:', item)
     try {
-      const token = localStorage.getItem('authToken')
+      // const token = localStorage.getItem('authToken')
+      const { token } = auth
       const response = await axios.put(
         `${process.env.REACT_APP_BASE_URL}/api/tables/${tableId}/order`,
         {
@@ -66,7 +68,8 @@ const Bill = () => {
   }
 
   const handleFreeTable = async () => {
-    const token = localStorage.getItem('authToken')
+    // const token = localStorage.getItem('authToken')
+    const { token } = auth
     try {
       await axios.put(
         `${process.env.REACT_APP_BASE_URL}/api/tables/${tableId}/free`,

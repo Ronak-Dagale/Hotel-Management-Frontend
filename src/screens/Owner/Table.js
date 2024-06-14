@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react'
-
+import { useAuth } from '../../store/auth'
 import { io } from 'socket.io-client'
 const Table = () => {
   const [tables, setTables] = useState([])
-
+  const { auth } = useAuth()
   useEffect(() => {
     const socket = io(`${process.env.REACT_APP_BASE_URL}`)
     // Fetch all tables on component mount
-    const token = localStorage.getItem('authToken') // Retrieve the token from localStorage
+    // const token = localStorage.getItem('authToken') // Retrieve the token from localStorage
+    const { token } = auth
 
     fetch(`${process.env.REACT_APP_BASE_URL}/api/tables`, {
       method: 'GET',
@@ -48,7 +49,8 @@ const Table = () => {
 
   const handleDeleteHighestTable = async () => {
     // Handle delete functionality
-    const token = localStorage.getItem('authToken')
+    // const token = localStorage.getItem('authToken')
+    const { token } = auth
     try {
       // Retrieve the token from localStorage
 
@@ -92,7 +94,8 @@ const Table = () => {
 
   const handleAddNewTable = async () => {
     // Handle add new table functionality
-    const token = localStorage.getItem('authToken')
+    // const token = localStorage.getItem('authToken')
+    const { token } = auth
     try {
       const response = await fetch(
         `${process.env.REACT_APP_BASE_URL}/api/tables/add`,

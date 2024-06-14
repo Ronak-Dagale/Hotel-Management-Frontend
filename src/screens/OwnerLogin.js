@@ -22,7 +22,11 @@ const OwnerLogin = () => {
         storeTokenInLs(response.data.authToken)
         // localStorage.setItem('authToken', response.data.authToken)
         // console.log(response.data)
-        setAuth({ isAuthenticated: true, user: response.data.user })
+        setAuth({
+          isAuthenticated: true,
+          user: response.data.user,
+          token: response.data.authToken,
+        })
         navigate('/Owner/dashboard')
       } else {
         return { success: false, message: response.data.errors[0].msg }

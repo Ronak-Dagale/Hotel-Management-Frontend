@@ -3,6 +3,7 @@ import Login from '../components/Login'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { useAuth } from '../store/auth'
+
 const CookLogin = () => {
   const navigate = useNavigate()
   const { storeTokenInLs, setAuth } = useAuth()
@@ -18,7 +19,11 @@ const CookLogin = () => {
       )
       if (response.data.success) {
         storeTokenInLs(response.data.authToken)
-        setAuth({ isAuthenticated: true, user: response.data.user })
+        setAuth({
+          isAuthenticated: true,
+          user: response.data.user,
+          token: response.data.authToken,
+        })
         navigate('/Cook/dashboard')
       } else {
         return { success: false, message: response.data.errors[0].msg }

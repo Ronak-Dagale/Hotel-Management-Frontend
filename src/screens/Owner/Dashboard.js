@@ -3,17 +3,19 @@ import { useNavigate } from 'react-router-dom'
 
 import { io } from 'socket.io-client'
 import Cards from '../../components/Cards'
+import { useAuth } from '../../store/auth'
 
 const Dashboard = () => {
-   const socket = io(`${process.env.REACT_APP_BASE_URL}`)
- // const socket = io(`${process.env.REACT_APP_WS_URL}`)
+  const socket = io(`${process.env.REACT_APP_BASE_URL}`)
+  // const socket = io(`${process.env.REACT_APP_WS_URL}`)
   const navigate = useNavigate()
   const [tables, setTables] = useState([])
+  const { auth } = useAuth()
 
   useEffect(() => {
     const fetchTablesData = () => {
-      const token = localStorage.getItem('authToken') // Retrieve the token from localStorage
-
+      //const token = localStorage.getItem('authToken') // Retrieve the token from localStorage
+      const { token } = auth
       fetch(`${process.env.REACT_APP_BASE_URL}/api/tables/`, {
         method: 'GET',
         headers: {
@@ -82,8 +84,8 @@ const Dashboard = () => {
   }, [])
 
   const freeTable = async (tableId) => {
-    const token = localStorage.getItem('authToken') // Retrieve the token from localStorage
-
+    // const token = localStorage.getItem('authToken') // Retrieve the token from localStorage
+    const { token } = auth
     await fetch(
       `${process.env.REACT_APP_BASE_URL}/api/tables/${tableId}/free`,
       {

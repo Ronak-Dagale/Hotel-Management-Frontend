@@ -18,7 +18,11 @@ const WaiterLogin = () => {
       )
       if (response.data.success) {
         storeTokenInLs(response.data.authToken)
-        setAuth({ isAuthenticated: true, user: response.data.user })
+        setAuth({
+          isAuthenticated: true,
+          user: response.data.user,
+          token: response.data.authToken,
+        })
         navigate('/Waiter/dashboard')
       } else {
         return { success: false, message: response.data.errors[0].msg }

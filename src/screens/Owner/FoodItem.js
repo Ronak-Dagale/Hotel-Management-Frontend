@@ -1,20 +1,21 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import EditFoodItemModal from './EditFoodItemModal'
-
+import { useAuth } from '../../store/auth'
 const FoodItem = () => {
   const [foodItems, setFoodItems] = useState([])
   const [categories, setCategories] = useState([])
   const [selectedFoodItem, setSelectedFoodItem] = useState(null)
   const [editModalShow, setEditModalShow] = useState(false)
-
+  const { auth } = useAuth()
   useEffect(() => {
     fetchFoodItems()
     fetchCategories()
   }, [])
 
   const fetchFoodItems = async () => {
-    const token = localStorage.getItem('authToken')
+    // const token = localStorage.getItem('authToken')
+    const { token } = auth
     try {
       const res = await axios.get(
         `${process.env.REACT_APP_BASE_URL}/api/fooditems/`,
@@ -32,7 +33,8 @@ const FoodItem = () => {
   }
 
   const fetchCategories = async () => {
-    const token = localStorage.getItem('authToken')
+    // const token = localStorage.getItem('authToken')
+    const { token } = auth
     try {
       const res = await axios.get(
         `${process.env.REACT_APP_BASE_URL}/api/foodcategory/`,
@@ -55,7 +57,8 @@ const FoodItem = () => {
   }
 
   const handleDelete = async (id) => {
-    const token = localStorage.getItem('authToken')
+    // const token = localStorage.getItem('authToken')
+    const { token } = auth
     try {
       await axios.delete(
         `${process.env.REACT_APP_BASE_URL}/api/fooditems/delete/${id}`,
@@ -87,7 +90,8 @@ const FoodItem = () => {
     // console.log(updatedFoodItem)
     updatedFoodItem.status =
       updatedFoodItem.status === 'Active' ? 'Inactive' : 'Active'
-    const token = localStorage.getItem('authToken')
+    // const token = localStorage.getItem('authToken')
+    const { token } = auth
     try {
       await axios.put(
         `${process.env.REACT_APP_BASE_URL}/api/fooditems/update/${id}`,
@@ -106,7 +110,8 @@ const FoodItem = () => {
   }
 
   const saveFoodItem = async (updatedFoodItem) => {
-    const token = localStorage.getItem('authToken')
+    // const token = localStorage.getItem('authToken')
+    const { token } = auth
     if (selectedFoodItem) {
       await axios.put(
         `${process.env.REACT_APP_BASE_URL}/api/fooditems/update/${updatedFoodItem.id}`,

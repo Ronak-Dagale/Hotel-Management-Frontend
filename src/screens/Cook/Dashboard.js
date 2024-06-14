@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { io } from 'socket.io-client'
-
+import { useAuth } from '../../store/auth'
 const socket = io(`${process.env.REACT_APP_BASE_URL}`) // Replace with your actual server URL
 
 const Dashboard = () => {
@@ -9,10 +9,11 @@ const Dashboard = () => {
   const [pendingOrders, setPendingOrders] = useState([])
   const [doneOrders, setDoneOrders] = useState([])
   const [tables, setTables] = useState([])
-
+  const { auth } = useAuth()
   useEffect(() => {
     const fetchTables = async () => {
-      const token = localStorage.getItem('authToken')
+      // const token = localStorage.getItem('authToken')
+      const { token } = auth
       try {
         const response = await fetch(
           `${process.env.REACT_APP_BASE_URL}/api/tables`,
@@ -262,7 +263,8 @@ const Dashboard = () => {
     // console.log('from handleaction : ')
     // console.log(order)
     // console.log(action)
-    const token = localStorage.getItem('authToken')
+    // const token = localStorage.getItem('authToken')
+    const { token } = auth
     try {
       if (action === 'Accept') {
         try {

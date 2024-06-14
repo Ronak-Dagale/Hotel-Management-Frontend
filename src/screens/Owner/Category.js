@@ -2,18 +2,19 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import EditCategoryModal from './EditCategoryModal'
-
+import { useAuth } from '../../store/auth'
 const CategoryManagement = () => {
   const [categories, setCategories] = useState([])
   const [selectedCategory, setSelectedCategory] = useState(null)
   const [modalShow, setModalShow] = useState(false)
-
+  const { auth } = useAuth()
   useEffect(() => {
     fetchCategories()
   }, [])
 
   const fetchCategories = async () => {
-    const token = localStorage.getItem('authToken')
+    // const token = localStorage.getItem('authToken')
+    const { token } = auth
 
     try {
       const res = await axios.get(
@@ -33,7 +34,8 @@ const CategoryManagement = () => {
   }
 
   const saveCategory = async (category) => {
-    const token = localStorage.getItem('authToken')
+    // const token = localStorage.getItem('authToken')
+    const { token } = auth
     try {
       if (category.id) {
         await axios.put(
@@ -65,7 +67,8 @@ const CategoryManagement = () => {
   }
 
   const deleteCategory = async (id) => {
-    const token = localStorage.getItem('authToken')
+    // const token = localStorage.getItem('authToken')
+    const { token } = auth
     try {
       await axios.delete(
         `${process.env.REACT_APP_BASE_URL}/api/foodcategory/delete/${id}`,

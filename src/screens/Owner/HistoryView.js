@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { useParams } from 'react-router-dom'
-
+import { useAuth } from '../../store/auth'
 const HistoryOrderView = () => {
   const [order, setOrder] = useState(null)
   const [error, setError] = useState(null)
   const { orderId } = useParams()
-
+  const { auth } = useAuth()
   useEffect(() => {
     const fetchOrder = async () => {
-      const token = localStorage.getItem('authToken')
+      // const token = localStorage.getItem('authToken')
+      const { token } = auth
       // console.log('Token:', token)
 
       if (!token) {

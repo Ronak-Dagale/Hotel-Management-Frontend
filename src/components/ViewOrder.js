@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 import OrderCard from './OrderCard'
 import axios from 'axios'
 import io from 'socket.io-client'
+import { useAuth } from '../store/auth'
 
 const socket = io(`${process.env.REACT_APP_BASE_URL}`)
 
@@ -16,9 +17,11 @@ const ViewOrder = () => {
   const [confirmedOrders, setConfirmedOrders] = useState([])
   const [categories, setCategories] = useState([])
 
+  const { auth } = useAuth()
   useEffect(() => {
     const fetchItems = async () => {
-      const token = localStorage.getItem('authToken')
+      // const token = localStorage.getItem('authToken')
+      const { token } = auth
       // console.log('Token:', token)
       try {
         // Book the table
@@ -67,7 +70,7 @@ const ViewOrder = () => {
     }
 
     const fetchCategories = async () => {
-      const token = localStorage.getItem('authToken')
+      const { token } = auth
       try {
         const categoriesResponse = await axios.get(
           `${process.env.REACT_APP_BASE_URL}/api/foodcategory`,
@@ -128,7 +131,7 @@ const ViewOrder = () => {
   const confirmOrder = async (itemId) => {
     const itemToConfirm = items.find((item) => item._id === itemId)
     // console.log('Item to confirm:', itemToConfirm)
-    const token = localStorage.getItem('authToken')
+    const { token } = auth
     try {
       const response = await axios.put(
         `${process.env.REACT_APP_BASE_URL}/api/tables/${tableId}/order`,
@@ -166,7 +169,8 @@ const ViewOrder = () => {
   }
 
   const deleteItem = async (item) => {
-    const token = localStorage.getItem('authToken')
+    // const token = localStorage.getItem('authToken')
+    const { token } = auth
     try {
       const response = await axios.put(
         `${process.env.REACT_APP_BASE_URL}/api/tables/${tableId}/order`,
