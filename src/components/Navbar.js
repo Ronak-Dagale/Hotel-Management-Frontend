@@ -67,6 +67,11 @@ const Navbar = () => {
                       History
                     </Link>
                   </li>
+                  <li className='nav-item'>
+                    <Link className='nav-link' to='/owner/revenue'>
+                      Revenue
+                    </Link>
+                  </li>
                 </>
               )}
             </ul>

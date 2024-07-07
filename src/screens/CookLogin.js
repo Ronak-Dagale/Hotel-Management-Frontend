@@ -1,9 +1,8 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Login from '../components/Login'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { useAuth } from '../store/auth'
-
 const CookLogin = () => {
   const navigate = useNavigate()
   const { storeTokenInLs, setAuth } = useAuth()
@@ -33,6 +32,19 @@ const CookLogin = () => {
       return { success: false, message: 'An error occurred. Please try again.' }
     }
   }
+
+  useEffect(() => {
+    const fun = async () => {
+      const response = await fetch(`${process.env.REACT_APP_BASE_URL}/`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      // console.log(response.status)
+    }
+    fun()
+  }, [])
   return (
     <div>
       <Login handleSubmit={handleSubmit} />

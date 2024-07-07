@@ -39,7 +39,7 @@ const Bill = () => {
   }, [tableId])
 
   const handleDelete = async (item) => {
-    console.log('Deleting item:', item)
+    // console.log('Deleting item:', item)
     try {
       // const token = localStorage.getItem('authToken')
       const { token } = auth

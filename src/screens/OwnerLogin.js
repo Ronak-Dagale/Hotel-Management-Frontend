@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Login from '../components/Login'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
@@ -36,7 +36,18 @@ const OwnerLogin = () => {
       return { success: false, message: 'An error occurred. Please try again.' }
     }
   }
-
+  useEffect(() => {
+    const fun = async () => {
+      const response = await fetch(`${process.env.REACT_APP_BASE_URL}/`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      // console.log(response.status)
+    }
+    fun()
+  }, [])
   return (
     <div>
       <Login handleSubmit={handleSubmit} />

@@ -6,6 +6,16 @@ const Home = () => {
   const { clearAuth } = useAuth()
 
   useEffect(() => {
+    const fun = async () => {
+      const response = await fetch(`${process.env.REACT_APP_BASE_URL}/`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      // console.log(response.status)
+    }
+    fun()
     clearAuth()
   }, [])
 

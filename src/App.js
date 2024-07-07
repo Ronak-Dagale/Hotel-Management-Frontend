@@ -25,6 +25,7 @@ import Bill from './screens/Owner/Bill'
 import CompletedOrdersPage from './screens/Owner/History'
 import ProtectedRoute from './components/ProtectedRoute'
 import HistoryOrderView from './screens/Owner/HistoryView'
+import Revenue from './screens/Owner/Revenue'
 function App() {
   return (
     <>
@@ -64,6 +65,7 @@ function App() {
                 path='/owner/history/:orderId'
                 element={<HistoryOrderView />}
               />
+              <Route exact path='/owner/revenue' element={<Revenue />} />
             </Route>
           </Routes>
         </div>
